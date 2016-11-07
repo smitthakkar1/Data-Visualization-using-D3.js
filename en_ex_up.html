@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <title>D3 JS Learning Turotial</title>
+</head>
+<body>
+<script>
+    var d = [10]
+
+    var container = d3.select("body")
+            .append("svg")
+            .attr("width",500)
+            .attr("height",500);
+
+    var circle1 = container.append("circle")
+            .attr("cx",50)
+            .attr("cy",50)
+            .attr("r",40);
+
+    var circle2 = container.append("circle")
+            .attr("cx",50)
+            .attr("cy",150)
+            .attr("r",40);
+
+    var circle = container.selectAll("circle")
+            .data(d)
+            .attr("fill","red")
+            .exit()
+                .attr("fill","blue");
+
+</script>
+
+</body>
+</html>

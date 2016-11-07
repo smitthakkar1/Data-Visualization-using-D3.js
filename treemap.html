@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <title>Learn D3</title>
+</head>
+<body>
+<script>
+    var container = d3.select("body")
+            .append("svg")
+            .attr("width",700)
+            .attr("height",700);
+    var color = d3.scale.category10(); // scale of 10 colors
+
+    d3.json("data2.json", function (data) {
+
+
+    var treemap = d3.layout.treemap()
+            .size([500,500])
+            .nodes(data);
+
+        var cells = container.selectAll(".node")
+                .data(treemap)
+                .enter()
+                .append("g")
+                .attr("class","cell");
+        cells.append("rect")
+                .attr("x",function (d) { return d.x;})
+                .attr("y", function (d) { return d.y;})
+                .attr("height", function (d) { return d.dy;})
+                .attr("width", function (d) { return d.dx;})
+                .attr("stroke","yellow")
+                .attr("fill", function (d) { return d.children ? null : color(d.parent.name);});
+
+        cells.append("text")
+                .text(function (d) { return d.children ? null : d.name ;})
+                .attr("x", function (d) { return d.x + d.dx/2})
+                .attr("y", function (d) { return d.y + d.dy/2})
+                .attr("fill","black")
+                .attr("text-anchor","middle");
+
+    })
+</script>
+
+</body>
+</html>

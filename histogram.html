@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <title>D3 Learn</title>
+</head>
+<body>
+<script>
+    var height = 500;
+    var width = 500;
+    var padding = 50;
+
+    d3.csv("data3.csv", function (data) {
+
+        var map = data.map(function (i) {
+            return parseInt(i.age);
+        })
+
+        var hist = d3.histogram()
+                .thresholds(4)
+                (map)              //histogram.bins method replace by histogram.thresholds() and now
+                console.log(hist);                     //will create n+1 bins specified the num of thresolds
+                                    // in 3.0 there are fields like x,y,dx and length which are replaced by x0,x1,length.
+                                    // dx = x1-x0 it is basically a range. length is num of elements in each bin.
+
+
+        var x = d3.scaleLinear()
+                .domain([0,d3.max(map)])
+                .range([0,width]);
+
+        var xAxis = d3.axisBottom()
+                .scale(x);
+
+        var container = d3.select("body")
+                .append("svg")
+                .attr("height",height+padding)
+                .attr("width",width)
+                .attr("transform","translate(50,0)");
+
+        var group = container.append("g")
+                .attr("transform","translate(50,"+height+")")
+                .call(xAxis);
+
+        var bars = container.selectAll(".bar")
+                .data(hist)
+                .enter()
+                .append("g");
+
+
+        bars.append("rect")
+                .attr("x",function (d) { return x(d.x0);})
+                .attr("y",function (d) { return 500 - x(d.x1)})
+                .attr("width",function (d) { return x(d.x1-d.x0);})
+                .attr("height", function (d) { return x(d.x1);})
+                .attr("transform","translate(50,0)")
+                .attr("fill","steelblue");
+
+        bars.append("text")
+                .text(function (d) { return d.x1;})
+                .attr("x",function (d) { return x(d.x0);})
+                .attr("y",function (d) { return 500 - x(d.x1)})
+                .attr("dy","50px")
+                .attr("dx",function (d) { return x(d.x1-d.x0)/2 + 20;})
+                .attr("fill","yellow")
+                .attr("text-anchor","middle");
+            }
+    )
+</script>
+
+</body>
+</html>

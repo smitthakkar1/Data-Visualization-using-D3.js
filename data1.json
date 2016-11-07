@@ -1,0 +1,17 @@
+{
+  "name": "Hariram",
+  "children": [
+    {
+      "name": "Girish",
+      "children": [{"name": "Smit"},
+                  {"name": "Mansi"}]
+    },
+    {
+      "name":"Bipin",
+      "children": [
+        {"name": "Shukan"},
+        {"name": "Meet"},
+        {"name": "ABC"}]
+    }
+  ]
+}

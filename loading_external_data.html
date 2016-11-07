@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <title>Learn D3 </title>
+</head>
+<body>
+<script>
+    d3.csv("data.csv", function (data) {
+
+        var container = d3.select("body")
+                .append("svg")
+                .attr("height", 1000)
+                .attr("width", 1000)
+
+        container.selectAll("rect")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("y", function (x, i) {
+                    return i * 100;
+                })
+                .attr("height", 75)
+                .attr("width", function (x) {
+                    return x.age * 10;
+                })
+                .attr("fill", "blue")
+
+        container.selectAll("text")
+                .data(data)
+                .enter()
+                .append("text")
+                .attr("fill","white")
+                .attr("y", function (x, i) {
+                    return i * 101+25;
+                })
+                .text(function (d) { return d.name;
+                        }
+
+                )
+    })
+
+
+</script>
+</body>
+</html>

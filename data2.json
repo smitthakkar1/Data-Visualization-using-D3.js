@@ -1,0 +1,24 @@
+{
+  "name": "Hariram",
+  "value": 100,
+  "children": [
+    {
+      "name": "Girish",
+      "value": 75,
+    "children": [{"name": "Smit", "value": 25},
+        {"name": "Mansi", "value": 25}]
+    },
+    {
+      "name":"Bipin",
+      "value": 75,
+      "children": [
+        {"name": "Shukan", "value": 25},
+        {"name": "Meet", "value": 25},
+        {"name": "ABC", "value": 25}]
+    },
+    {
+      "name":"XYZ",
+      "value": 75
+    }
+  ]
+}

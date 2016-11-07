@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <title>Learn D3</title>
+</head>
+<body>
+<script>
+    var container = d3.select("body")
+            .append("svg")
+            .attr("width",500)
+            .attr("height",500);
+
+    var circle = container.append("circle")
+            .attr("cx",50)
+            .attr("cy",50)
+            .attr("r",40);
+
+    circle.transition()
+            .duration(2000)
+            .attr("cy",100)
+            .transition()
+            .on("end", function(){d3.select(this).attr("fill","blue");}) //CHANGE on in place of each
+            .attr("cx",300);
+</script>
+
+</body>
+</html>

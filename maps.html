@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <title>Learn D3</title>
+</head>
+<body>
+<script>
+
+    var container = d3.select("body")
+            .append("svg")
+            .attr("height",700)
+            .attr("width",700);
+
+    d3.json("sweden.geojson", function (data) {
+
+        var group = container.selectAll("g")
+                .data(data.features)
+                .enter()
+                .append("g")
+
+        var projection = d3.geoMercator().scale(800).translate([0,1500]);
+        var path = d3.geoPath().projection(projection);
+
+        var areas = group.append("path")
+                .attr("d",path)
+                .attr("class","area")
+                .attr("stroke","white")
+                .attr("fill","red");
+
+    });
+</script>
+
+</body>
+</html>

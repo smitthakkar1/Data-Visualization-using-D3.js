@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <title>Learn D3</title>
+</head>
+<body>
+<script>
+    var container = d3.select("body")
+            .append("svg")
+            .attr("width",700)
+            .attr("height",700);
+
+    var group = container.append("g")
+            .attr("transform","translate(200,200)");
+
+    var p = Math.PI * 2;
+    var r = 150;
+
+    var arc = d3.arc()
+            .innerRadius(r - 40)
+            .outerRadius(r)
+            .startAngle(0)
+            .endAngle(p);
+
+    group.append("path")
+            .attr("d",arc);
+
+
+</script>
+</body>
+</html>
